@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Transactions-Dashboard/static/css/main.b12586a0.css",
+    "main.js": "/Transactions-Dashboard/static/js/main.5e13fd47.js",
+    "index.html": "/Transactions-Dashboard/index.html",
+    "main.b12586a0.css.map": "/Transactions-Dashboard/static/css/main.b12586a0.css.map",
+    "main.5e13fd47.js.map": "/Transactions-Dashboard/static/js/main.5e13fd47.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b12586a0.css",
+    "static/js/main.5e13fd47.js"
+  ]
+}
