@@ -20,13 +20,13 @@ export default function TransactionsTable() {
 
   // Fetch customers data with react-query
   const { data: customers } = useQuery("customers", async () => {
-    const response = await axios.get("https://customer-d7qa4unus-moatyaas-projects.vercel.app/customers");
+    const response = await axios.get("https://customer-cbrnant29-moatyaas-projects.vercel.app/customers");
     return response.data;
   });
 
   // Fetch transactions data with react-query
   const { data: transactions } = useQuery("transactions", async () => {
-    const response = await axios.get("https://customer-d7qa4unus-moatyaas-projects.vercel.app/transactions");
+    const response = await axios.get("https://customer-cbrnant29-moatyaas-projects.vercel.app/transactions");
     return response.data;
   });
 

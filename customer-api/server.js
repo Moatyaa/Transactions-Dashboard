@@ -26,6 +26,8 @@ const data = {
   ]
 };
 
+// Middleware
+app.use(cors());
 app.use(function (req, res, next) {
   //Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");
@@ -33,8 +35,6 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
   next();
 });
-// Middleware
-app.use(cors());
 
 // endPoints
 app.get('/customers', (req, res) => {
