@@ -15,18 +15,18 @@ export default function TransactionsTable() {
   const [filteredAmount, setFilteredAmount] = useState("");
   const [searchedNameResult, setSearchedName] = useState([]);
   const [searchedAmountResult, setSearchedAmount] = useState([]);
-  const [selectedRowName, setSelectedRowName] = useState(''); 
+  const [selectedRowName, setSelectedRowName] = useState('');
   const [graphedTransaction, setGraphedTransaction] = useState([]);
 
   // Fetch customers data with react-query
   const { data: customers } = useQuery("customers", async () => {
-    const response = await axios.get("http://localhost:3001/customers");
+    const response = await axios.get("https://customer-1s2foo45l-moatyaas-projects.vercel.app/customers");
     return response.data;
   });
 
   // Fetch transactions data with react-query
   const { data: transactions } = useQuery("transactions", async () => {
-    const response = await axios.get("http://localhost:3001/transactions");
+    const response = await axios.get("https://customer-1s2foo45l-moatyaas-projects.vercel.app/transactions");
     return response.data;
   });
 
@@ -47,7 +47,7 @@ export default function TransactionsTable() {
     if (!searchedTransAmount) {
       return transactions;
     }
-    if(searchedTransAmount > 0){
+    if (searchedTransAmount > 0) {
       return transactions.filter(
         (transaction) => transaction.amount >= searchedTransAmount
       );
@@ -120,7 +120,7 @@ export default function TransactionsTable() {
               />
             </form>
 
-                <table className="table  mt-4 table-striped">
+            <table className="table  mt-4 table-striped">
               <thead>
                 <tr className="fs-6">
                   <th scope="">#</th>
@@ -131,27 +131,27 @@ export default function TransactionsTable() {
               </thead>
               <tbody>
                 {Array.isArray(searchedAmountResult) &&
-                searchedAmountResult.length > 0 ? (
+                  searchedAmountResult.length > 0 ? (
                   searchedAmountResult.map((transaction, index) => (
                     <React.Fragment key={transaction.id}>
-                      {searchedNameResult?.map((customer) =>  customer.id === transaction.customer_id ?  
-                          <React.Fragment key={transaction.id}>
-                              <tr
-                              className="pointer"
-                              key={transaction.id}
-                              onClick={() =>
-                                handleRowClick(
-                                  transaction.customer_id,
-                                  customer.name
-                                )
-                              }
-                            >
-                              <th scope="row">{index + 1}</th>
-                              <td>{customer.name}</td>
-                              <td>{transaction.amount}</td>
-                              <td>{transaction.date}</td>
-                            </tr>
-                          </React.Fragment> : ''
+                      {searchedNameResult?.map((customer) => customer.id === transaction.customer_id ?
+                        <React.Fragment key={transaction.id}>
+                          <tr
+                            className="pointer"
+                            key={transaction.id}
+                            onClick={() =>
+                              handleRowClick(
+                                transaction.customer_id,
+                                customer.name
+                              )
+                            }
+                          >
+                            <th scope="row">{index + 1}</th>
+                            <td>{customer.name}</td>
+                            <td>{transaction.amount}</td>
+                            <td>{transaction.date}</td>
+                          </tr>
+                        </React.Fragment> : ''
                       )}
                     </React.Fragment>
                   ))
@@ -165,37 +165,37 @@ export default function TransactionsTable() {
           </div>
         </div>
         <div className="col-lg-6">
-            <div className="p-4 bg-white rounded shadow">
-              <h2 className="sub-title mb-2">Chart for {selectedRowName}</h2>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart
-                  data={graphedTransaction}
-                  margin={{ left: 12, right: 12 }}
-                >
-                  <CartesianGrid vertical={false} />
-                  <XAxis
-                    dataKey="date"
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={8}
-                    tickFormatter={(value) =>
-                      new Date(value).toLocaleString("en-us", {
-                        month: "short",
-                      })
-                    }
-                  />
-                  <ChartTooltip cursor={false} />
-                  <Line
-                    dataKey="amount"
-                    type="natural"
-                    stroke="#8884d8"
-                    strokeWidth={2}
-                    dot={false}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          
+          <div className="p-4 bg-white rounded shadow">
+            <h2 className="sub-title mb-2">Chart for {selectedRowName}</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart
+                data={graphedTransaction}
+                margin={{ left: 12, right: 12 }}
+              >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  tickFormatter={(value) =>
+                    new Date(value).toLocaleString("en-us", {
+                      month: "short",
+                    })
+                  }
+                />
+                <ChartTooltip cursor={false} />
+                <Line
+                  dataKey="amount"
+                  type="natural"
+                  stroke="#8884d8"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
         </div>
       </div>
     </>
